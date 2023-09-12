@@ -1,0 +1,14 @@
+.booking {
+  background-color: green;
+  color: white;
+}
+
+.booked {
+  background-color: red;
+  color: white;
+  pointer-events: none;
+}
+
+.chiTietPhongVe {
+  background-color: rgba(0, 0, 0, 0.75);
+}
