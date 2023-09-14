@@ -1,42 +1,31 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { Chair, InfoMovie } from "../../types/QuanLyDatVe";
 import { getChairListThunk } from "./thunk";
 
-interface Chair {
-  maGhe: number;
-  tenGhe: string;
-  maRap: number;
-  loaiGhe: string;
-  stt: string;
-  giaVe: number;
-  daDat: boolean;
-  taiKhoanNguoiDat: null;
-}
+type QuanLyDatVeInitialState = {
+  chairBookings: Chair[];
+  chairBookeds: Chair[];
+  isisFetchingChairList: boolean;
+  inforMovie: InfoMovie;
+};
 
-const initialState = {
-  chairBookings: [
-    {
-      maGhe: 0,
-      tenGhe: "string",
-      maRap: 0,
-      loaiGhe: "string",
-      stt: "string",
-      giaVe: 0,
-      daDat: true,
-      taiKhoanNguoiDat: null,
+const initialState: QuanLyDatVeInitialState = {
+  chairBookings: [],
+  chairBookeds: [],
+  isisFetchingChairList: false,
+  inforMovie: {
+    danhSachGhe: [],
+    thongTinPhim: {
+      diaChi: "",
+      gioChieu: "",
+      hinhAnh: "",
+      maLichChieu: 0,
+      ngayChieu: "",
+      tenCumRap: "",
+      tenPhim: "",
+      tenRap: "",
     },
-  ],
-  chairBookeds: [
-    {
-      maGhe: 0,
-      tenGhe: "string",
-      maRap: 0,
-      loaiGhe: "string",
-      stt: "string",
-      giaVe: 0,
-      daDat: true,
-      taiKhoanNguoiDat: null,
-    },
-  ],
+  },
 };
 
 const quanLyDatVeSlice = createSlice({
@@ -59,8 +48,15 @@ const quanLyDatVeSlice = createSlice({
       return { ...state, chairBookeds: data, chairBookings: [] };
     },
   },
-  extraReducers(builder) {
-    builder.addCase(getChairListThunk.fulfilled, (state, { payload }) => {});
+  extraReducers: (builder) => {
+    builder
+      .addCase(getChairListThunk.pending, (state) => {
+        state.isisFetchingChairList = true;
+      })
+      .addCase(getChairListThunk.fulfilled, (state, { payload }) => {
+        state.inforMovie = payload;
+        state.isisFetchingChairList = false;
+      });
   },
 });
 

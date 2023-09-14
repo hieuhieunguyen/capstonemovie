@@ -1,14 +1,23 @@
+.chiTietPhongVe {
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.bookedAnotherUser {
+  background-color: rgb(250, 249, 249) !important;
+  color: red;
+}
+
+.gheVip {
+  background-color: rgb(245, 158, 11) !important;
+}
+
 .booking {
-  background-color: green;
+  background-color: green !important;
   color: white;
 }
 
 .booked {
-  background-color: red;
+  background-color: red !important;
   color: white;
   pointer-events: none;
-}
-
-.chiTietPhongVe {
-  background-color: rgba(0, 0, 0, 0.75);
 }

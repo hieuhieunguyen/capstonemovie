@@ -1,5 +1,5 @@
 import { apiInstance } from "../constants/apiInstance";
-import { Chair } from "../types/QuanLyDatVe";
+import { InfoMovie } from "../types/QuanLyDatVe";
 
 const api = apiInstance({
   baseURL: import.meta.env.VITE_QUAN_LY_DAT_VE_API,
@@ -7,5 +7,5 @@ const api = apiInstance({
 
 export const quanLyDatVeServices = {
   getChairList: () =>
-    api.get<ApiResponse<Chair[]>>("/LayDanhSachPhongVe?MaLichChieu=16909"),
+    api.get<ApiResponse<InfoMovie>>("/LayDanhSachPhongVe?MaLichChieu=16909"),
 };

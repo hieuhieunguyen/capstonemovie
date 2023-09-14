@@ -1,16 +1,17 @@
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store";
 import { quanLyDatVeActions } from "../../store/quanLyDatVe/slice";
-import data from "./data.json";
 import cn from "classnames";
-import { getChairListThunk } from "../../store/quanLyDatVe/thunk";
 
 const PhongVeTemplate = () => {
   const dispatch = useAppDispatch();
-  const { chairBookings, chairBookeds } = useSelector(
+  const { chairBookings, chairBookeds, inforMovie } = useSelector(
     (state: RootState) => state.quanLyDatVe
   );
 
+  const dataMovie = inforMovie.thongTinPhim;
+
+  console.log(chairBookings);
   return (
     <div className="w-full h-full">
       <div className="absolute top-0 left-0 w-full h-full">
@@ -28,71 +29,80 @@ const PhongVeTemplate = () => {
                 SCREEN
               </div>
               <div className="flex gap-2 flex-wrap items-center justify-center mt-6">
-                {data.map((ghe) => {
+                {inforMovie.danhSachGhe.map((ghe) => {
                   return (
-                    <div className="bg-gray-400 rounded">
-                      <button
-                        onClick={() => {
-                          dispatch(quanLyDatVeActions.chairBookingsAction(ghe));
-                        }}
-                        className={cn("w-10 h-10 btn", {
-                          booking: chairBookings.find(
-                            (e) => e.tenGhe === ghe.tenGhe
-                          ),
-                          booked: chairBookeds.find(
-                            (e) => e.tenGhe === ghe.tenGhe
-                          ),
-                        })}
-                      >
-                        {ghe.tenGhe}
-                      </button>
-                    </div>
+                    <button
+                      onClick={() => {
+                        dispatch(quanLyDatVeActions.chairBookingsAction(ghe));
+                      }}
+                      className={cn("w-10 h-10 btn bg-gray-400 rounded", {
+                        booking: chairBookings.find(
+                          (e) => e.tenGhe === ghe.tenGhe
+                        ),
+                        booked: chairBookeds.find(
+                          (e) => e.tenGhe === ghe.tenGhe
+                        ),
+                        bookedAnotherUser: ghe.daDat,
+                        gheVip: ghe.loaiGhe === "Vip",
+                      })}
+                    >
+                      {ghe.tenGhe}
+                    </button>
                   );
                 })}
               </div>
             </div>
             <div className="shadow-[rgba(255,255,255,_0.5)_0px_0px_16px] px-5 py-2 text-white rounded">
-              <h1 className="text-center">Joker</h1>
+              <h1 className="text-center text-4xl">{dataMovie.tenPhim}</h1>
               <div>
-                <div className="flex justify-between mt-8">
+                <div className="flex justify-between py-6 border-b-2 border-dotted">
                   <p>Ngày chiếu giờ chiếu</p>
                   <p>
-                    19/12/2023 - <span>13:12</span>
+                    {dataMovie.ngayChieu} -{" "}
+                    <span className="text-amber-500">{dataMovie.gioChieu}</span>
                   </p>
                 </div>
-                <div className="flex justify-between mt-8">
+                <div className="flex justify-between py-6 border-b-2 border-dotted">
                   <p>Cụm rạp</p>
-                  <p>CGV - Aron Tân Bình</p>
+                  <p>{dataMovie.tenCumRap}</p>
                 </div>
-                <div className="flex justify-between mt-8">
+                <div className="flex justify-between py-6 border-b-2 border-dotted">
                   <p>Rạp</p>
-                  <p>Rạp 1</p>
+                  <p>{dataMovie.tenRap}</p>
                 </div>
-                <div className="flex justify-between mt-8">
+                <div className="flex justify-between py-6 border-b-2 border-dotted">
                   <p>Ghế chọn</p>
                   <div className="flex flex-wrap justify-end">
                     {chairBookings.map((ghe) => {
                       return (
                         <div className="inline-block">
-                          <span className="mr-2 ml-2">{ghe.tenGhe}</span>-{" "}
-                          <span>{ghe.giaVe}</span>,
+                          <span className="mr-2 ml-2 text-amber-500">
+                            {ghe.tenGhe}
+                          </span>
+                          - <span>{ghe.giaVe}đ</span>,
                         </div>
                       );
                     })}
                   </div>
                 </div>
-                <div className="flex justify-between mt-8">
+                <div className="flex justify-between py-6 mt-28 border-b-2 border-dotted">
                   <p>Ưu đãi</p>
                   <p>0 %</p>
                 </div>
-                <div className="flex justify-between mt-4">
+                <div className="flex justify-between py-6 mt-4 border-b-2 border-dotted">
                   <p>Tổng tiền</p>
-                  <p>150.000</p>
+                  <p>
+                    {chairBookings.reduce(
+                      (total, ghe) => (total += ghe.giaVe),
+                      0
+                    )}
+                    đ
+                  </p>
                 </div>
                 <div className="mt-10">
                   <button
                     onClick={() => {
-                      dispatch(getChairListThunk());
+                      dispatch(quanLyDatVeActions.chairBookedsAction());
                     }}
                     className="w-full bg-amber-500 py-2 rounded text-white"
                   >
