@@ -29,7 +29,7 @@ const PhongVeTemplate = () => {
                 SCREEN
               </div>
               <div className="flex gap-2 flex-wrap items-center justify-center mt-6">
-                {inforMovie.danhSachGhe.map((ghe) => {
+                {inforMovie.danhSachGhe.map((ghe: any) => {
                   return (
                     <button
                       onClick={() => {
@@ -37,10 +37,10 @@ const PhongVeTemplate = () => {
                       }}
                       className={cn("w-10 h-10 btn bg-gray-400 rounded", {
                         booking: chairBookings.find(
-                          (e) => e.tenGhe === ghe.tenGhe
+                          (e: any) => e.tenGhe === ghe.tenGhe
                         ),
                         booked: chairBookeds.find(
-                          (e) => e.tenGhe === ghe.tenGhe
+                          (e: any) => e.tenGhe === ghe.tenGhe
                         ),
                         bookedAnotherUser: ghe.daDat,
                         gheVip: ghe.loaiGhe === "Vip",
@@ -73,7 +73,7 @@ const PhongVeTemplate = () => {
                 <div className="flex justify-between py-6 border-b-2 border-dotted">
                   <p>Ghế chọn</p>
                   <div className="flex flex-wrap justify-end">
-                    {chairBookings.map((ghe) => {
+                    {chairBookings.map((ghe: any) => {
                       return (
                         <div className="inline-block">
                           <span className="mr-2 ml-2 text-amber-500">
@@ -93,7 +93,7 @@ const PhongVeTemplate = () => {
                   <p>Tổng tiền</p>
                   <p>
                     {chairBookings.reduce(
-                      (total, ghe) => (total += ghe.giaVe),
+                      (total: any, ghe: any) => (total += ghe.giaVe),
                       0
                     )}
                     đ
