@@ -152,7 +152,7 @@ const PhongVeTemplate = () => {
             </div>
             <div className="flex ml-4">
               <button className="bookedAnotherUser text-white font-bold py-3 px-3 rounded"></button>
-              <span className="ml-1">Ghế thường</span>
+              <span className="ml-1">Ghế có người chọn</span>
             </div>
           </div>
         </div>
