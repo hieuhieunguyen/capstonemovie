@@ -1,12 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { Chair, InfoMovie } from "../../types/QuanLyDatVe";
-import { getChairListThunk } from "./thunk";
+import { buyTicketsThunk, getChairListThunk } from "./thunk";
 
 type QuanLyDatVeInitialState = {
   chairBookings: Chair[];
   chairBookeds: Chair[];
   isisFetchingChairList: boolean;
   inforMovie: InfoMovie;
+  maLichChieuPhim: string;
+  isBuyingTickets: boolean;
 };
 
 const initialState: QuanLyDatVeInitialState = {
@@ -26,6 +28,8 @@ const initialState: QuanLyDatVeInitialState = {
       tenRap: "",
     },
   },
+  maLichChieuPhim: "",
+  isBuyingTickets: false,
 };
 
 const quanLyDatVeSlice = createSlice({
@@ -56,6 +60,19 @@ const quanLyDatVeSlice = createSlice({
       .addCase(getChairListThunk.fulfilled, (state, { payload }) => {
         state.inforMovie = payload;
         state.isisFetchingChairList = false;
+        console.log(state.inforMovie);
+      })
+      .addCase(getChairListThunk.rejected, (state) => {
+        state.isisFetchingChairList = false;
+      })
+      .addCase(buyTicketsThunk.pending, (state) => {
+        state.isBuyingTickets = true;
+      })
+      .addCase(buyTicketsThunk.fulfilled, (state) => {
+        state.isBuyingTickets = false;
+      })
+      .addCase(buyTicketsThunk.rejected, (state) => {
+        state.isBuyingTickets = false;
       });
   },
 });

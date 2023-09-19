@@ -24,3 +24,18 @@ export interface Infor {
   tenPhim: string;
   tenRap: string;
 }
+
+export interface Ticket {
+  maLichChieu: string;
+  danhSachVe: [
+    {
+      maGhe: number;
+      gaiVe: number;
+    }
+  ];
+}
+
+export interface InfoTickets {
+  maLichChieu: string | undefined;
+  danhSachVe: Chair[];
+}

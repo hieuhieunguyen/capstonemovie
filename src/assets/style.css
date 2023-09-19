@@ -3,8 +3,8 @@
 }
 
 .bookedAnotherUser {
-  background-color: rgb(250, 249, 249) !important;
-  color: red;
+  background-color: rgb(85, 84, 84) !important;
+  pointer-events: none;
 }
 
 .gheVip {

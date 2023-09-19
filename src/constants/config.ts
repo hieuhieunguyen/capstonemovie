@@ -1,4 +1,4 @@
 export const PATH = {
-  chitietphongve: "/chitietphongve",
+  chitietphongve: "/chitietphongve/:maLichChieu",
   demo: "/demo",
 };

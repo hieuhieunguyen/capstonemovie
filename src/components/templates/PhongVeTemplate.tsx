@@ -2,6 +2,12 @@ import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store";
 import { quanLyDatVeActions } from "../../store/quanLyDatVe/slice";
 import cn from "classnames";
+import { useParams } from "react-router-dom";
+import {
+  buyTicketsThunk,
+  getChairListThunk,
+} from "../../store/quanLyDatVe/thunk";
+import { useEffect } from "react";
 
 const PhongVeTemplate = () => {
   const dispatch = useAppDispatch();
@@ -11,7 +17,15 @@ const PhongVeTemplate = () => {
 
   const dataMovie = inforMovie.thongTinPhim;
 
-  console.log(chairBookings);
+  const parmas = useParams();
+  const { maLichChieu } = parmas;
+
+  if (maLichChieu) {
+    useEffect(() => {
+      dispatch(getChairListThunk(maLichChieu));
+    }, [dispatch]);
+  }
+
   return (
     <div className="w-full h-full">
       <div className="absolute top-0 left-0 w-full h-full">
@@ -28,19 +42,19 @@ const PhongVeTemplate = () => {
               <div className="bg-amber-500 text-white text-center text-6xl p-4 rounded">
                 SCREEN
               </div>
-              <div className="flex gap-2 flex-wrap items-center justify-center mt-6">
-                {inforMovie.danhSachGhe.map((ghe: any) => {
+              <div className="flex gap-2 flex-wrap items-center mt-6 pl-4">
+                {inforMovie.danhSachGhe.map((ghe) => {
                   return (
                     <button
                       onClick={() => {
                         dispatch(quanLyDatVeActions.chairBookingsAction(ghe));
                       }}
-                      className={cn("w-10 h-10 btn bg-gray-400 rounded", {
+                      className={cn("w-10 h-10 btn bg-gray-300 rounded", {
                         booking: chairBookings.find(
-                          (e: any) => e.tenGhe === ghe.tenGhe
+                          (e) => e.tenGhe === ghe.tenGhe
                         ),
                         booked: chairBookeds.find(
-                          (e: any) => e.tenGhe === ghe.tenGhe
+                          (e) => e.tenGhe === ghe.tenGhe
                         ),
                         bookedAnotherUser: ghe.daDat,
                         gheVip: ghe.loaiGhe === "Vip",
@@ -73,7 +87,7 @@ const PhongVeTemplate = () => {
                 <div className="flex justify-between py-6 border-b-2 border-dotted">
                   <p>Ghế chọn</p>
                   <div className="flex flex-wrap justify-end">
-                    {chairBookings.map((ghe: any) => {
+                    {chairBookings.map((ghe) => {
                       return (
                         <div className="inline-block">
                           <span className="mr-2 ml-2 text-amber-500">
@@ -93,7 +107,7 @@ const PhongVeTemplate = () => {
                   <p>Tổng tiền</p>
                   <p>
                     {chairBookings.reduce(
-                      (total: any, ghe: any) => (total += ghe.giaVe),
+                      (total, ghe) => (total += ghe.giaVe),
                       0
                     )}
                     đ
@@ -103,6 +117,13 @@ const PhongVeTemplate = () => {
                   <button
                     onClick={() => {
                       dispatch(quanLyDatVeActions.chairBookedsAction());
+                      console.log("chairBookings: ", chairBookings);
+                      dispatch(
+                        buyTicketsThunk({
+                          maLichChieu: maLichChieu,
+                          danhSachVe: chairBookings,
+                        })
+                      );
                     }}
                     className="w-full bg-amber-500 py-2 rounded text-white"
                   >
@@ -110,6 +131,28 @@ const PhongVeTemplate = () => {
                   </button>
                 </div>
               </div>
+            </div>
+          </div>
+          <div className="mt-10 text-white flex">
+            <div className="flex ml-4">
+              <button className="bg-gray-300 text-white font-bold py-3 px-3 rounded"></button>
+              <span className="ml-1">Ghế thường</span>
+            </div>
+            <div className="flex ml-4">
+              <button className="bg-amber-500 text-white font-bold py-3 px-3 rounded"></button>
+              <span className="ml-1">Ghế VIP</span>
+            </div>
+            <div className="flex ml-4">
+              <button className="bg-green-700 text-white font-bold py-3 px-3 rounded"></button>
+              <span className="ml-1">Ghế đang chọn</span>
+            </div>
+            <div className="flex ml-4">
+              <button className="bg-red-600 text-white font-bold py-3 px-3 rounded"></button>
+              <span className="ml-1">Ghế đã chọn</span>
+            </div>
+            <div className="flex ml-4">
+              <button className="bookedAnotherUser text-white font-bold py-3 px-3 rounded"></button>
+              <span className="ml-1">Ghế thường</span>
             </div>
           </div>
         </div>
