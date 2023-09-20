@@ -1,0 +1,48 @@
+.bookedAnotherUser {
+  background-color: rgb(85, 84, 84) !important;
+  pointer-events: none;
+}
+
+.gheVip {
+  background-color: rgb(245, 158, 11) !important;
+}
+
+.booking {
+  background-color: green !important;
+  color: white;
+}
+
+.booked {
+  background-color: red !important;
+  color: white;
+  pointer-events: none;
+}
+
+.content {
+  max-width: 1225px;
+}
+.containerChair {
+  grid-template-columns: repeat(16, minmax(0, 1fr));
+}
+
+.result {
+  width: 38%;
+}
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.65);
+}
+
+.main {
+  background-image: url(./images/VN-vi-20230904-popsignuptwoweeks-perspective_alpha_website_large.jpg);
+  background-position: left;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+
+.bookedTickets {
+  max-width: 80%;
+  overflow: hidden !important;
+  max-height: 78px;
+}
