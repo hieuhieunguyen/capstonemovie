@@ -33,7 +33,7 @@ export const Header = () => {
             }}
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold p-10 rounded"
           >
-            test
+            Đặt vé
           </button>
         </div>
         <div className="flex justify-around items-center">
