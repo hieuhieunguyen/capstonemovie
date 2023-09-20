@@ -1,0 +1,16 @@
+// khai báo interface cũng đc mà type cũng được
+
+export interface Movie {
+  maPhim: number;
+  tenPhim: string;
+  biDanh: string;
+  trailer: string;
+  hinhAnh: string;
+  moTa: string;
+  maNhom: string;
+  ngayKhoiChieu: string;
+  danhGia: number;
+  hot: boolean;
+  dangChieu: boolean;
+  sapChieu: boolean;
+}

@@ -2,6 +2,8 @@ import { RouteObject } from "react-router-dom";
 import { PATH } from "../constants/config";
 import PhongVe from "../pages/PhongVe";
 import Demo from "../demo/Demo";
+import { AuthLayout, MainLayout } from "components/layouts";
+import { Account, Home, Login, Register } from "pages";
 
 export const router: RouteObject[] = [
   {
@@ -11,5 +13,32 @@ export const router: RouteObject[] = [
   {
     path: PATH.demo,
     element: <Demo />,
+  },
+  {
+    path: "/",
+    element: <MainLayout />,
+    children: [
+      {
+        index: true,
+        element: <Home />,
+      },
+      {
+        path: PATH.account,
+        element: <Account />,
+      },
+    ],
+  },
+  {
+    element: <AuthLayout />,
+    children: [
+      {
+        path: PATH.login,
+        element: <Login />,
+      },
+      {
+        path: PATH.register,
+        element: <Register />,
+      },
+    ],
   },
 ];

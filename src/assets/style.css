@@ -1,3 +1,10 @@
+:root {
+  --header-height: 80px;
+  --max-width: 1200px;
+  --primary-color: #111;
+  --secondary-color: #1233;
+}
+
 .bookedAnotherUser {
   background-color: rgb(85, 84, 84) !important;
   pointer-events: none;
@@ -34,7 +41,7 @@
 }
 
 .main {
-  background-image: url(./images/VN-vi-20230904-popsignuptwoweeks-perspective_alpha_website_large.jpg);
+  background-image: url(../../public/images/VN-vi-20230904-popsignuptwoweeks-perspective_alpha_website_large.jpg);
   background-position: left;
   background-size: cover;
   background-repeat: no-repeat;
