@@ -3,7 +3,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { RegisterSchema, RegisterSchemaType } from "schema";
 import { quanLyNguoiDungServices } from "services";
-import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { PATH } from "constant";
 import Input from "components/ui/Input";
@@ -14,15 +13,11 @@ const RegisterTemplate = () => {
     register,
     formState: { errors },
   } = useForm<RegisterSchemaType>({
-    // validate khi on change luôn
     mode: "onChange",
     resolver: zodResolver(RegisterSchema),
   });
 
   const navigate = useNavigate();
-
-  // khi có error thì ko chạy vào hàm submit này
-  // SubmitHandler giúp định dạng đúng cái kiểu schema mà mình định nghĩa
   const onSubmit: SubmitHandler<RegisterSchemaType> = async (value) => {
     try {
       console.log({ value });
@@ -37,28 +32,6 @@ const RegisterTemplate = () => {
     <form className="pb-20 px-20" onSubmit={handleSubmit(onSubmit)}>
       <h2 className="text-white text-40 font-600">Register</h2>
       <div className="mt-10">
-        {/* <input
-          type="text"
-          placeholder="Tài khoản"
-          className="outline-none block w-full p-10 text-white border border-white-300 rounded-lg bg-[#333]"
-          // {...register("taiKhoan", {
-          //   required: "Vui lòng nhập tài khoản",
-          //   minLength: {
-          //     value: 6,
-          //     message: "Nhập từ 6 ký tự",
-          //   },
-          //   maxLength: {
-          //     value: 20,
-          //     message: "Nhập tối đa 20 ký tự",
-          //   },
-          //   // pattern: {
-          //   //   value: ,
-          //   //   message: 'abc'
-          //   // }
-          // })}
-          {...register("taiKhoan")}
-        />
-        <p className="text-red-500">{errors?.taiKhoan?.message as string}</p> */}
         <Input
           register={register}
           name="taiKhoan"

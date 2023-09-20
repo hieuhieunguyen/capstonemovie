@@ -16,30 +16,20 @@ const quanLyNguoiDungSlice = createSlice({
   name: "quanLyNguoiDung",
   initialState,
   reducers: {
-    // xử lý những action đồng bộ
     logOut: (state) => {
       state.user = undefined;
       localStorage.removeItem("accessToken");
     },
   },
   extraReducers: (builder) => {
-    // xử lý action bất đồng bộ (call API)
-    // builder = promise
     builder
-      // .addCase(loginThunk.pending, (state, { payload }) => {
-      //   console.log("payload pending: ", payload);
-      // })
       .addCase(loginThunk.fulfilled, (state, { payload }) => {
         state.user = payload;
 
-        // lưu thông tin đăng nhập vào localStorage
         if (payload) {
           localStorage.setItem("accessToken", payload.accessToken);
         }
       })
-      // .addCase(loginThunk.rejected, (state, { payload }) => {
-      //   console.log("payload rejected: ", payload);
-      // });
       .addCase(getUserThunk.fulfilled, (state, { payload }) => {
         if (payload) {
           state.user = payload;

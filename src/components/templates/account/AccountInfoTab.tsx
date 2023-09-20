@@ -4,11 +4,10 @@ import Input from "components/ui/Input";
 import { useAuth } from "hooks";
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { AccountSchema, AccountSchemaType } from "schema/AccountSchema";
+import { AccountSchema, AccountSchemaType } from "schema";
 import { RootState, useAppDispatch } from "store";
 import { getUserThunk, updateUserThunk } from "store/quanLyNguoiDung/thunk";
 import { styled } from "styled-components";
-import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 
 const AccountInfoTab = () => {
@@ -28,7 +27,6 @@ const AccountInfoTab = () => {
     resolver: zodResolver(AccountSchema),
   });
 
-  // giúp đưa thông tin vào ô input và thường đc sử dụng trong useEffect
   useEffect(() => {
     reset({
       ...user,
@@ -109,7 +107,6 @@ const AccountInfoTab = () => {
 
 export default AccountInfoTab;
 
-// kế thừa từ component Input
 const InputS = styled(Input)`
   margin-top: 10px;
   input {

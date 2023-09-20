@@ -1,7 +1,6 @@
 import { RouteObject } from "react-router-dom";
 import { PATH } from "../constants/config";
 import PhongVe from "../pages/PhongVe";
-import Demo from "../demo/Demo";
 import { AuthLayout, MainLayout } from "components/layouts";
 import { Account, Home, Login, Register } from "pages";
 
@@ -9,10 +8,6 @@ export const router: RouteObject[] = [
   {
     path: PATH.chitietphongve,
     element: <PhongVe />,
-  },
-  {
-    path: PATH.demo,
-    element: <Demo />,
   },
   {
     path: "/",
