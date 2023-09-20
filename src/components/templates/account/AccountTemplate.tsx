@@ -33,7 +33,7 @@ export const AccountTemplate = () => {
               <div className="min-h-full">
                 <h2 className="text-center text-4xl">Lịch sử đặt vé</h2>
                 <div>
-                  {data.map((e: any, index: number) => {
+                  {data?.map((e: any, index: number) => {
                     return (
                       <div
                         key={index}
@@ -63,7 +63,7 @@ export const AccountTemplate = () => {
                             </p>
                             <p>
                               Vị trí ghế:{" "}
-                              {e?.danhSachGhe.map((e: any, index: number) => {
+                              {e?.danhSachGhe?.map((e: any, index: number) => {
                                 return (
                                   <span
                                     key={index}
