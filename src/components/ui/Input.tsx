@@ -1,7 +1,6 @@
 import { HTMLInputTypeAttribute } from "react";
 import { UseFormRegister } from "react-hook-form";
 
-// định nghĩa kiểu dữ liệu
 type InputProps = {
   register?: UseFormRegister<any>;
   error?: string;

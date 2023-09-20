@@ -1,5 +1,3 @@
-// khai báo interface cũng đc mà type cũng được
-
 export interface Movie {
   maPhim: number;
   tenPhim: string;

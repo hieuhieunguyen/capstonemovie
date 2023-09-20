@@ -11,7 +11,6 @@ export const HomeTemplate = () => {
     (state: RootState) => state.quanLyPhim
   );
 
-  // dispatch action thunk call api phải dispatch trong useEffect
   useEffect(() => {
     dispatch(getMovieListThunk());
   }, [dispatch]);

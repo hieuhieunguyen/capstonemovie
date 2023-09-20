@@ -13,5 +13,35 @@ export type UserInfo = User & {
     maLoaiNguoiDung: string;
     tenLoai: string;
   };
-  thongTinDatVe: [];
+  thongTinDatVe: InfoTickets[];
 };
+
+export interface TicketsBuyed {
+  giaVe: number;
+  hinhAnh: string;
+  maVe: number;
+  ngayDat: string;
+  tenPhim: string;
+  thoiLuongPhim: number;
+}
+
+export interface InfoTickets {
+  danhSachGhe: InfoChair[];
+  giaVe: number;
+  hinhAnh: string;
+  maVe: number;
+  ngayDat: string;
+  tenPhim: string;
+  thoiLuongPhim: number;
+}
+
+export interface InfoChair {
+  maCumRap: string;
+  maGhe: number;
+  maHeThongRap: string;
+  maRap: number;
+  tenCumRap: string;
+  tenGhe: string;
+  tenHeThongRap: string;
+  tenRap: string;
+}

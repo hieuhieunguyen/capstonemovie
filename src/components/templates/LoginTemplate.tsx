@@ -3,8 +3,6 @@ import { PATH } from "constant";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { LoginSchema, LoginSchemaType } from "schema/LoginSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-// import { quanLyNguoiDungServices } from "services";
-import { toast } from "react-toastify";
 import { useAppDispatch } from "store";
 import { loginThunk } from "store/quanLyNguoiDung/thunk";
 import Input from "components/ui/Input";
@@ -24,14 +22,6 @@ const LoginTemplate = () => {
   const dispatch = useAppDispatch();
 
   const onSubmit: SubmitHandler<LoginSchemaType> = async (value) => {
-    // try {
-    //   await quanLyNguoiDungServices.login(value);
-    //   toast.success("Đăng ký thành công");
-    //   navigate("/");
-    // } catch (err) {
-    //   toast.error(err?.response?.data?.content);
-    // }
-
     dispatch(loginThunk(value))
       .unwrap()
       .then(() => {
@@ -44,13 +34,6 @@ const LoginTemplate = () => {
     <form className="pt-[30px] pb-[60px]" onSubmit={handleSubmit(onSubmit)}>
       <h2 className="text-white text-40 font-600">Sign In</h2>
       <div className="mt-40">
-        {/* <input
-          type="text"
-          placeholder="userName"
-          className="outline-none block w-full p-10 text-white border border-white-300 rounded-lg bg-[#333]"
-          {...register("taiKhoan")}
-        />
-        <p className="text-red-500">{errors?.taiKhoan?.message}</p> */}
         <Input
           register={register}
           name="taiKhoan"
